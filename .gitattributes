@@ -1,1 +1,2 @@
 * -text
+*.php linguist-detectable=false
