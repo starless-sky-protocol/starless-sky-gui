@@ -1,0 +1,25 @@
+.btn {
+    position: relative;
+    top: 0;
+    transition: 0.4s;
+    border: none !important;
+}
+
+.btn:hover {
+    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .28) !important;
+    top: -4px;
+    transition: 0.3s;
+}
+
+.btn.btn-sm:hover {
+    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .2) !important;
+    top: -2px;
+    transition: 0.3s;
+}
+
+.btn:active {
+    opacity: 0.85;
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .15) !important;
+    top: -2.5px;
+    transition: 0.2s;
+}

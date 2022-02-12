@@ -1,0 +1,82 @@
+html, body {
+    height: 100%;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.rounded-10 {
+    border-radius: 10px;
+    ;
+}
+
+@media only screen and (max-width: 600px) {
+    #content {
+        box-shadow: none !important;
+    }
+
+    body {
+        background: white !important;
+    }
+}
+
+.card {
+    border: none;
+}
+
+.a {
+    position: relative;
+    top: 0;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.4s;
+}
+
+.a:hover {
+    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .14) !important;
+    top: -8px;
+    transition: 0.3s;
+}
+
+.a:active {
+    opacity: 0.85;
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .08) !important;
+    top: -4px;
+    transition: 0.2s;
+}
+
+.input-links {
+    padding: 0;
+    position: relative;
+    top: 5px;
+    left: 8px;
+}
+
+.input-links li {
+    font-size: 14px;
+    display: inline;
+    list-style: none;
+    margin-right: 8px;
+}
+
+.modal-content {
+    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .2) !important;
+}
+
+.bootbox-prompt-message {
+    margin-bottom: 14px;
+}
+
+.bootbox-cancel {
+    background-color: white;
+    color: black;
+}
+
+.btn-link {
+    text-decoration: none !important;
+}
