@@ -1,4 +1,5 @@
 <?php
+
 namespace Controller;
 
 use Inphinit\Viewing\View;
@@ -16,6 +17,32 @@ class Dashboard
                 "max-vh" => true,
                 "full-screen" => true,
                 "show-header" => false
+            ]
+        ));
+    }
+
+    public function newmessage()
+    {
+        View::render('layout.dashboard', array(
+            "title" => "Compose message",
+            "view" => "dashboard/compose",
+            "data" => [
+                "title" => "Compose message",
+                "selected-tab" => "new-message",
+                "max-vh" => true,
+                "full-screen" => true,
+                "show-header" => false
+            ]
+        ));
+    }
+
+    public function validate()
+    {
+        View::render('layout.dashboard', array(
+            "title" => "Validate Transactions",
+            "view" => "dashboard/view-transactions",
+            "data" => [
+                "selected-tab" => ""
             ]
         ));
     }

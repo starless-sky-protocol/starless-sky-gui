@@ -13,8 +13,8 @@ async function refreshMessageList(forced) {
     }
 
     $.ajax({
-        url: url + "/messages",
-        method: "LIST",
+        url: url + "/message.list",
+        method: "POST",
         data: JSON.stringify({
             private_key: crypto.decrypt(privateKeyEncoded),
             folder: folder,
@@ -28,39 +28,41 @@ async function refreshMessageList(forced) {
             res.response.messages.map(function (msg) {
                 keys.push(msg.from);
             })
-            $.ajax({
-                url: url + "/identity",
-                method: "VIEW",
-                data: JSON.stringify({
-                    public_keys: keys
-                }),
-                success: function (res2) {
-                    let keysResponse = res2.response;
-                    res.response.messages.reverse().map(function (msg) {
-                        if ($('div[skyid="' + msg.id + '"]').length) {
-                            return;
-                        }
-                        $("#from-name").text(keysResponse.filter(function (i) { return i.public_key == msg.from })[0].identity.name ?? "(unknown)");
-                        $("#from-public-key").text(msg.from);
-                        if (msg.read) {
-                            $("#subject").text(escapeHtml(msg.message.subject));
-                        } else {
-                            $("#subject").html("<strong>" + escapeHtml(msg.message.subject) + "</strong>");
-                        }
-                        $("#date").text(moment.unix(msg.created_at).fromNow());
-                        $("#tag").attr("skyid", msg.id);
-                        let element = $("#templateRow").clone().html()
-                            .replace(`id="subject"`, `subject="${msg.id}"`)
-                            .replaceAll(/\bid="/g, ' __id="')
-                            .replace('d-none', '')
-                            .replace("/*skyid*/", msg.id);
-                        $("#templateRow").after("<div isclone='yes' class='col-12 border-bottom s-link'>" + element + "</div>");
-                    });
-                }
-            })
+            if (res.response.messages.length > 0) {
+                $.ajax({
+                    url: url + "/identity.get-public-info",
+                    method: "POST",
+                    data: JSON.stringify({
+                        public_keys: keys
+                    }),
+                    success: function (res2) {
+                        let keysResponse = res2.response;
+                        res.response.messages.reverse().map(function (msg) {
+                            if ($('div[skyid="' + msg.id + '"]').length) {
+                                return;
+                            }
+                            $("#from-name").text(keysResponse.filter(function (i) { return i.public_key == msg.from })[0].identity.name ?? "(unknown)");
+                            $("#from-public-key").text(msg.from);
+                            if (msg.read) {
+                                $("#subject").text(escapeHtml(msg.message.subject));
+                            } else {
+                                $("#subject").html("<strong>" + escapeHtml(msg.message.subject) + "</strong>");
+                            }
+                            $("#date").text(moment.unix(msg.created_at).fromNow());
+                            $("#tag").attr("skyid", msg.id);
+                            let element = $("#templateRow").clone().html()
+                                .replace(`id="subject"`, `subject="${msg.id}"`)
+                                .replaceAll(/\bid="/g, ' __id="')
+                                .replace('d-none', '')
+                                .replace("/*skyid*/", msg.id);
+                            $("#templateRow").after("<div isclone='yes' class='col-12 border-bottom s-link'>" + element + "</div>");
+                        });
+                    }
+                })
+            }
         },
         error: function (res) {
-            console.log(res);
+            toast(res.responseJSON.messages[0].message)
         }
     })
 }
@@ -74,21 +76,24 @@ function viewMessage(id) {
     if (folder) {
         $("#delete-msg-btn span").text("Delete for me");
         $("#reply-msg-btn").css("display", "inline");
+        $("#edit-msg-btn").css("display", "none");
     } else {
         $("#delete-msg-btn span").text("Delete for everyone");
         $("#reply-msg-btn").css("display", "none");
+        $("#edit-msg-btn").css("display", "inline");
     }
 
     $.ajax({
-        url: url + "/messages/" + id,
-        method: "VIEW",
+        url: url + "/message.read",
+        method: "POST",
         data: JSON.stringify({
+            id: id,
             private_key: crypto.decrypt(privateKeyEncoded)
         }),
         success: function (res) {
             $.ajax({
-                url: url + "/identity",
-                method: "VIEW",
+                url: url + "/identity.get-public-info",
+                method: "POST",
                 data: JSON.stringify({
                     public_keys: [res.response.pair.from]
                 }),
@@ -109,7 +114,7 @@ function viewMessage(id) {
                     $("#info-created-at").val(new Date(res.response.manifest.created_at * 1000).toLocaleString());
                     $("#info-updated-at").val(new Date(res.response.manifest.updated_at * 1000).toLocaleString());
                     $("#info-is-modified").val(res.response.manifest.is_modified ? "Yes" : "No");
-                    $("#info-blake3").val(res.response.manifest.message_blake3_digest);
+                    $("#info-digest").val(res.response.manifest.message_digest);
 
                     $("#viewMessagePanel").css("visibility", "visible");
                     $("#msg-from-name").html(fromName);
@@ -133,9 +138,10 @@ async function deleteMessage() {
     var cont = await asyncConfirm("Are you sure want to delete this message permanently? If you have sent this message, it will be deleted for all recipients.", "Delete message", "Cancel");
     if (cont == false) return;
     $.ajax({
-        url: url + "/messages/" + selectedMessage,
+        url: url + "/message.delete/",
         method: "DELETE",
         data: JSON.stringify({
+            id: selectedMessage,
             private_key: crypto.decrypt(privateKeyEncoded)
         }),
         success: function (res) {
@@ -147,4 +153,16 @@ async function deleteMessage() {
             refreshMessageList(true);
         }
     });
+}
+
+function replyMessage() {
+    window.location.replace("/dashboard/new?reply=" + selectedMessage);
+}
+
+function editMessage() {
+    window.location.replace("/dashboard/new?edit=" + selectedMessage);
+}
+
+function viewTransactions() {
+    window.location.replace("/dashboard/validate?type=message&id=" + selectedMessage);
 }

@@ -22,20 +22,5 @@ function gotoCreateIdentity() {
 }
 
 async function loadIdentity() {
-    let mnemonic = await asyncPrompt("To import your private key, please insert below your mnemonic.",
-        "Welcome again!",
-        true,
-        "password",
-        {
-            confirm: {
-                label: "Import"
-            },
-            cancel: {
-                label: "Cancel"
-            }
-        });
-
-    if (mnemonic != null) {
-        
-    }
+    window.location.replace("/identity/import")
 }

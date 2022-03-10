@@ -161,14 +161,24 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 col-sm-12 d-flex align-items-center">
-                        <small>BLAKE3 digest</small>
+                        <small>SHA-1 digest</small>
                     </div>
                     <div class="col-md-9 col-sm-12 d-flex flex-column align-items-center">
                         <div class="input-group">
-                            <input class="form-control form-control-sm bg-white" readonly value="..." id="info-blake3" />
+                            <input class="form-control form-control-sm bg-white" readonly value="..." id="info-digest" />
                             <div class="input-group-append">
-                                <button onclick="copyToClipboard('info-blake3', 'Copied to clipboard')" class="btn btn-sm btn-outline-primary" type="button"><i class="las la-copy"></i></button>
+                                <button onclick="copyToClipboard('info-digest', 'Copied to clipboard')" class="btn btn-sm btn-outline-primary" type="button"><i class="las la-copy"></i></button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3 col-sm-12 d-flex align-items-center">
+                        <small>Blockchain Transactions</small>
+                    </div>
+                    <div class="col-md-9 col-sm-12 d-flex flex-column align-items-center">
+                        <div class="input-group">
+                            <button onclick="viewTransactions()" class="btn btn-sm btn-outline-primary" type="button"><i class="las la-link"></i> View transactions</button>
                         </div>
                     </div>
                 </div>
@@ -176,7 +186,8 @@
         </div>
         <div class="row border-top mt-4 pt-4">
             <div class="col-sm-12">
-                <a id="reply-msg-btn" href="#" class="s-nav-link"><i class="las la-reply"></i><span>Reply</span></a>
+                <a id="reply-msg-btn" onclick="replyMessage()" href="#" class="s-nav-link"><i class="las la-reply"></i><span>Reply</span></a>
+                <a id="edit-msg-btn" onclick="editMessage()" href="#" class="s-nav-link"><i class="las la-pen"></i><span>Edit</span></a>
                 <a href="#" class="s-nav-link" data-toggle="collapse" data-target="#message-info-panel"><i class="las la-qrcode"></i><span>Information</span></a>
                 <a id="delete-msg-btn" onclick="deleteMessage()" href="#" class="s-danger-link"><i class="las la-trash"></i><span>Delete</span></a>
             </div>

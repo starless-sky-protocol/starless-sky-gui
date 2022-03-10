@@ -6,24 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="/css/main.css" class="rel">
-    <link rel="stylesheet" href="/css/dashboard.css" class="rel">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/vendor/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendor/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendor/toastify.css">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
 
-    <script src="//cdn.jsdelivr.net/npm/simple-crypto-js@2.5.0/dist/SimpleCrypto.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="https://momentjs.com/downloads/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sanitize-html/1.27.5/sanitize-html.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- VENDOR JS -->
+    <script type="text/javascript" src="/js/vendor/jquery.js"></script>
+    <script type="text/javascript" src="/js/vendor/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/vendor/simple-crypto.js"></script>
+    <script type="text/javascript" src="/js/vendor/bootbox.js"></script>
+    <script type="text/javascript" src="/js/vendor/toastify.js"></script>
+    <script type="text/javascript" src="/js/vendor/moment.js"></script>
+    <script type="text/javascript" src="/js/vendor/sanitize-html.js"></script>
+    <script type="text/javascript" src="/js/vendor/marked.js"></script>
+    <script type="text/javascript" src="/js/vendor/noble-hashes.js"></script>
+    <script type="text/javascript" type="module" src="/js/vendor/noble-hashes-wrapper.js"></script>
 
-    <script src="/js/main.js"></script>
-    <script src="/js/dashboard.js"></script>
+    <!-- MAIN JS -->
+    <script type=" text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/dashboard.js"></script>
+    <script type="text/javascript" src="/js/node-validator.js"></script>
 
     <title>Starless Sky | <?= $title ?></title>
 </head>
@@ -36,16 +43,33 @@
                     <i class="las la-bars la-2x"></i> <span class="ml-3"><?= $title ?></span>
                 </button>
                 <ul id="sidebarCollapse" class="s-nav-link-wrapper collapse <?= isMobile() ? 'mt-3' : 'show' ?>">
+                    <li class="s-nav-separator">
+                        <hr />
+                        <span>Messages</span>
+                    </li>
+                    <a href="/dashboard/new">
+                        <li class="s-nav-link <?= $data["selected-tab"] == "new-message" ? 'active' : '' ?>">
+                            <i class="las la-feather-alt"></i> Compose
+                        </li>
+                    </a>
                     <a href="/dashboard">
                         <li class="s-nav-link <?= $data["selected-tab"] == "messages" ? 'active' : '' ?>">
                             <i class="las la-envelope"></i> Inbox
                         </li>
                     </a>
-                    <li class="s-nav-link <?= $data["selected-tab"] == "contacts" ? 'active' : '' ?>">
-                        <i class="las la-address-book"></i> Contacts
+                    <li class="s-nav-separator">
+                        <hr />
+                        <span>Contracts</span>
                     </li>
                     <li class="s-nav-link <?= $data["selected-tab"] == "contracts" ? 'active' : '' ?>">
                         <i class="las la-file-alt"></i> Contracts
+                    </li>
+                    <li class="s-nav-separator">
+                        <hr />
+                        <span>Account</span>
+                    </li>
+                    <li class="s-nav-link <?= $data["selected-tab"] == "contacts" ? 'active' : '' ?>">
+                        <i class="las la-address-book"></i> Address book
                     </li>
                     <li class="s-nav-separator">
                         <hr />

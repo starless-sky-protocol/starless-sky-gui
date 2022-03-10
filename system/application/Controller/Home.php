@@ -50,4 +50,15 @@ class Home
             ]
         ));
     }
+
+    function invalidnetwork() {
+        View::render('layout.main-card', array(
+            "title" => "Corrupted Network",
+            "view" => "invalid",
+            "data" => [
+                "card.title" => "Corrupted nodes found",
+                "card.size" => 8
+            ]
+        ));
+    }
 }

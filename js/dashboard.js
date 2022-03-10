@@ -1,7 +1,6 @@
 const url = localStorage.getItem("url");
 const privateKeyEncoded = localStorage.getItem("private_key_encrypted");
 const publicKeyEncoded = localStorage.getItem("public_key_encripted");
-const mnemonicEncoded = localStorage.getItem("mnemonic_encrypted");
 
 if (url == null || privateKeyEncoded == null || publicKeyEncoded == null) {
     logout();
@@ -40,12 +39,6 @@ async function askForDecrypt(appendText = "") {
     }
 }
 
-function logout() {
-    deleteAllCookies();
-    localStorage.clear();
-    window.location.replace("/");
-}
-
 function lock() {
     toast("Locking session...");
     deleteAllCookies();
@@ -55,12 +48,18 @@ function lock() {
 $(window).on("load", function () {
     if (getCookie("password") == null) {
         askForDecrypt();
+        return;
     } else {
         try {
             crypto.decrypt(publicKeyEncoded);
         } catch {
             askForDecrypt();
+            return;
         }
+    }
+
+    if (getCookie("node") == null) {
+        validateNodes();
     }
 
     sleep(50).then(function () {

@@ -9,7 +9,7 @@
 </div>
 
 <section id="public-key">
-    <span class="section-header">Your public key</span>
+    <span class="section-header">Your public address</span>
     <p>
         This is your public key. It is used as your web address to receive messages,
         contracts and other information. Your public key does not expose your private key.
@@ -30,7 +30,7 @@
     </p>
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" onclick="showPrivateKeysDialog()">
-        View private keys
+        View private key
     </button>
 
     <!-- Modal -->
@@ -39,7 +39,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="keysModal">Identity private keys</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" onclick="clearPrivateKeysInformation()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -48,9 +48,7 @@
                         Do not send or show these keys to anyone. Once lost or stolen, your keys cannot be recovered.
                     </p>
                     <label>Private key</label>
-                    <input id="privateKey" class="form-control bg-white" readonly />
-                    <label class="mt-3">Key mnemonic</label>
-                    <textarea id="mnemonic" class="form-control bg-white" style="height: 100px" readonly></textarea>
+                    <textarea id="privateKey" style="height: 250px" class="form-control bg-white font-monospace" readonly></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link" data-dismiss="modal" onclick="clearPrivateKeysInformation()">Close</button>

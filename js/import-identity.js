@@ -9,11 +9,11 @@ function checkMnemonic() {
 }
 
 async function next() {
-    let mnemonic = $("#mnemonic").val();
+    let private_key = $("#private_key").val();
     $.ajax({
-        url: url + "/identity/mnemonic",
+        url: url + "/identity.auth",
         data: JSON.stringify({
-            mnemonic: mnemonic
+            private_key: private_key
         }),
         method: "POST",
         success: async function (res) {
@@ -22,9 +22,8 @@ async function next() {
             if (pass != null) {
                 var crypto = new SimpleCrypto(pass);
                 setCookie("password", pass, 30);
-                localStorage.setItem("mnemonic_encrypted", crypto.encrypt(mnemonic));
-                localStorage.setItem("private_key_encrypted", crypto.encrypt(res.response.private_key));
-                localStorage.setItem("public_key_encripted", crypto.encrypt(res.response.public_key));
+                localStorage.setItem("private_key_encrypted", crypto.encrypt(private_key));
+                localStorage.setItem("public_key_encripted", crypto.encrypt(res.response.public_address));
 
                 window.location.replace("/dashboard");
             }

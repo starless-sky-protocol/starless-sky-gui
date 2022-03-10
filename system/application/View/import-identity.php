@@ -5,11 +5,11 @@
     messages, contracts and keys.
 </p>
 
-<label>Paste here your secret recovery phrase (mnemonic):</label>
-<input id="mnemonic" oninput="checkMnemonic()" class="form-control bg-white" type="password" autocomplete="no" readonly onfocus="this.removeAttribute('readonly');" />
+<label>Paste here your private key PKCS8:</label>
+<textarea id="private_key" class="form-control bg-white" type="password" autocomplete="no" readonly onfocus="this.removeAttribute('readonly');"></textarea>
 
 <div class="d-flex flex-column mt-3">
-    <button id="continueBtn" disabled onclick="next()" class="mx-auto btn btn-primary">
+    <button id="continueBtn" onclick="next()" class="mx-auto btn btn-primary">
         <span>Import</span>
     </button>
 </div>

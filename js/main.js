@@ -100,6 +100,30 @@ function asyncPrompt(message, title, required = false, type = "text", buttons = 
     })
 }
 
+function logout() {
+    deleteAllCookies();
+    localStorage.clear();
+    window.location.replace("/");
+}
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
 function asyncAlert(message, title = "Starless Sky") {
     return new Promise(resolve => {
         bootbox.alert({
@@ -172,4 +196,29 @@ function copyToClipboard(elementId, successText) {
     navigator.clipboard.writeText(copyText.value);
 
     toast(successText);
+}
+
+async function asyncForEach(array, callback) {
+    for (let index = 0; index < array.length; index++) {
+        await callback(array[index], index, array);
+    }
+}
+
+function asyncAjax(url, method, data) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: url,
+            method: method,
+            dataType: "json",
+            data: JSON.stringify(data),
+            beforeSend: function () {
+            },
+            success: function (res) {
+                resolve(res) // Resolve promise and when success
+            },
+            error: function (err) {
+                reject(err) // Reject the promise and go to catch()
+            }
+        });
+    });
 }

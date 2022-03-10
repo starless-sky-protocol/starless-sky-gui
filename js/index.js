@@ -36,8 +36,8 @@ async function connect() {
     if(exit) return;
 
     $.ajax({
-        url: uri + "/ping",
-        method: "GET",
+        url: uri + "/server.ping",
+        method: "POST",
         success: function (res) {
             localStorage.setItem("url", uri);
             $("#loadingIcon").addClass("d-none");

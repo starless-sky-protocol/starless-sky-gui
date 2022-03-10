@@ -50,6 +50,32 @@ html, body {
     transition: 0.2s;
 }
 
+pre {
+    padding: 12px 18px;
+    background-color: rgb(243, 243, 243);
+    border-radius: 5px;
+}
+
+code {
+    padding: 3px 5px;
+    background-color: rgb(243, 243, 243);
+    border-radius: 5px;
+    color: black;
+}
+
+blockquote {
+    padding: 12px 18px;
+    border-left: 2px solid gainsboro;
+}
+
+blockquote p {
+    margin-bottom: 0;
+}
+
+.font-monospace {
+    font-family: monospace;
+}
+
 .input-links {
     padding: 0;
     position: relative;
@@ -79,4 +105,26 @@ html, body {
 
 .btn-link {
     text-decoration: none !important;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #5e5e5e #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #5e5e5e;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
 }

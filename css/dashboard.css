@@ -126,6 +126,7 @@
 
 .scroll-panel {
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .fit-to-screen {

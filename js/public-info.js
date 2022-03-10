@@ -1,7 +1,7 @@
 function updatePublicInfo() {
     $.ajax({
-        url: url + "/identity",
-        method: "PUT",
+        url: url + "/identity.set-public-info",
+        method: "POST",
         data: JSON.stringify({
             private_key: crypto.decrypt(privateKeyEncoded),
             public: {
@@ -10,7 +10,10 @@ function updatePublicInfo() {
             }
         }),
         success: function (res) {
-            document.location.reload();
+            toast("Public Identity updated");
+            sleep(3000).then(function () {
+                document.location.reload();
+            });
         },
         error: function (res) {
             console.log(res);
@@ -22,8 +25,8 @@ async function deletePublicInfo() {
     var cont = await asyncConfirm("Are you sure want to delete all your public information?", "Yes", "Cancel");
     if (cont == true) {
         $.ajax({
-            url: url + "/identity",
-            method: "DELETE",
+            url: url + "/identity.delete-public-info",
+            method: "POST",
             data: JSON.stringify({
                 private_key: crypto.decrypt(privateKeyEncoded)
             }),
@@ -42,8 +45,8 @@ async function deletePublicInfo() {
 
 $(window).on("load", function () {
     $.ajax({
-        url: url + "/identity",
-        method: "VIEW",
+        url: url + "/identity.get-public-info",
+        method: "POST",
         data: JSON.stringify({
             public_keys: [crypto.decrypt(publicKeyEncoded)]
         }),

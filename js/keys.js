@@ -27,7 +27,6 @@ async function showPrivateKeysDialog(appendText = "") {
     
     try {
         $("#privateKey").val(crypto.decrypt(privateKeyEncoded));
-        $("#mnemonic").text(crypto.decrypt(mnemonicEncoded));
         $('#keysModal').modal({ backdrop: true })
     } catch (error) {
         console.log(error);
