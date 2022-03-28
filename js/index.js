@@ -16,6 +16,11 @@ function validateAddress(string) {
 
 }
 
+async function useStarlessSkyMainnet() {
+    localStorage.setItem("url", "https://mainnet.starless-sky.org");
+    window.location.replace("/identity");
+}
+
 async function connect() {
     $("#loadingIcon").removeClass("d-none");
     $("#connectButton").prop("disabled", true);

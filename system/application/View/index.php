@@ -6,15 +6,16 @@
 <p>
     Let's connect to a Starless Sky Network you trust. Start it by typing it's address below:
 </p>
-<form>
-    <div class="form-group">
-        <label>Starless Sky Network Address:</label>
-        <input type="text" oninput="validateAddress(this.value)" id="address" class="form-control" required />
-        <div id="addressValidation" class="text-danger d-none mt-2">
-            Please, insert an valid URL.
-        </div>
+<div class="form-group">
+    <label>Starless Sky Network Address:</label>
+    <input type="text" oninput="validateAddress(this.value)" id="address" class="form-control" required />
+    <div id="addressValidation" class="text-danger d-none mt-2">
+        Please, insert an valid URL.
     </div>
-</form>
+</div>
+<a class="btn btn-link mb-3" onclick="useStarlessSkyMainnet()">
+    <img src="/images/Starless Sky.png" style="width: 24px; height: auto;" alt=""> Use Starless Sky Mainnet
+</a>
 <p>
     Never connect to an unknown network or it could be malicious and steal your messages,
     private keys or identities. If necessary, we recommend that you create your own network.
