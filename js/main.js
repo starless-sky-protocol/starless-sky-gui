@@ -198,6 +198,12 @@ function copyToClipboard(elementId, successText) {
     toast(successText);
 }
 
+function copyToClipboardRaw(elementId, successText) {
+    var copyText = document.getElementById(elementId);
+    navigator.clipboard.writeText(copyText.innerHTML);
+    toast(successText);
+}
+
 async function asyncForEach(array, callback) {
     for (let index = 0; index < array.length; index++) {
         await callback(array[index], index, array);

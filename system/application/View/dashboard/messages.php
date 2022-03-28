@@ -161,7 +161,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 col-sm-12 d-flex align-items-center">
-                        <small>SHA-1 digest</small>
+                        <small>Blake3 digest</small>
                     </div>
                     <div class="col-md-9 col-sm-12 d-flex flex-column align-items-center">
                         <div class="input-group">

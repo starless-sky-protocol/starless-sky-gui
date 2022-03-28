@@ -43,6 +43,15 @@
                     <i class="las la-bars la-2x"></i> <span class="ml-3"><?= $title ?></span>
                 </button>
                 <ul id="sidebarCollapse" class="s-nav-link-wrapper collapse <?= isMobile() ? 'mt-3' : 'show' ?>">
+                    <li class="s-nav-card">
+                        <div class="alert alert-primary">
+                            <h5 id="card_name" class="text-ellipsis">Your name</h5>
+                            <a href="#" onclick="copyToClipboardRaw('card_address', 'Address copied to the clipboard')">
+                                <p id="card_address" class="mb-0 d-inline-block text-ellipsis w-75">0x51251...abc</p>
+                                <i class="las la-copy"></i>
+                            </a>
+                        </div>
+                    </li>
                     <li class="s-nav-separator">
                         <hr />
                         <span>Messages</span>
@@ -61,15 +70,15 @@
                         <hr />
                         <span>Contracts</span>
                     </li>
-                    <li class="s-nav-link <?= $data["selected-tab"] == "contracts" ? 'active' : '' ?>">
-                        <i class="las la-file-alt"></i> Contracts
+                    <li class="s-nav-link text-muted <?= $data["selected-tab"] == "contracts" ? 'active' : '' ?>">
+                        <i class="las la-file-alt"></i> Contracts <small class="text-primary">SOON</small>
                     </li>
                     <li class="s-nav-separator">
                         <hr />
                         <span>Account</span>
                     </li>
-                    <li class="s-nav-link <?= $data["selected-tab"] == "contacts" ? 'active' : '' ?>">
-                        <i class="las la-address-book"></i> Address book
+                    <li class="s-nav-link text-muted <?= $data["selected-tab"] == "contacts" ? 'active' : '' ?>">
+                        <i class="las la-address-book"></i> Address book <small class="text-primary">SOON</small>
                     </li>
                     <li class="s-nav-separator">
                         <hr />

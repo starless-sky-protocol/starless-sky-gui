@@ -62,6 +62,21 @@ $(window).on("load", function () {
         validateNodes();
     }
 
+    $.ajax({
+        url: url + "/identity.get-public-info",
+        method: "POST",
+        data: JSON.stringify({
+            public_keys: [crypto.decrypt(publicKeyEncoded)]
+        }),
+        success: function (res) {
+            $("#card_name").html(res.response[0].identity.name ?? "&lt;no name&gt;");
+            $("#card_address").html(res.response[0].public_key);
+        },
+        error: function (res) {
+            console.log(res);
+        }
+    })
+
     sleep(50).then(function () {
         var sidebarWidth = $('#sidebar').width();
         $('.s-nav-link-wrapper').width(sidebarWidth);
