@@ -21,3 +21,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 
 # Redirect all urls to index.php if no exits files/folder
 RewriteRule ^ index.php [L]
+
+# Disable .git access
+RedirectMatch 404 /\.git

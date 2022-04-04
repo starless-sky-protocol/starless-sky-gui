@@ -1,4 +1,5 @@
 <?php
+
 use Inphinit\Routing\Route;
 
 Route::set('GET', '/invalid-network', 'Home:invalidnetwork');
